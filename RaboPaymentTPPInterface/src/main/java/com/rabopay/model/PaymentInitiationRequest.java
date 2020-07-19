@@ -1,5 +1,14 @@
 package com.rabopay.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/** PaymentInitiationRequest : Model Class for the Payment Request 
+ * @author Ashvini
+ *
+ */
+@Data
+@NoArgsConstructor
 public class PaymentInitiationRequest {
 	
 	private String debtorIBAN;
@@ -12,46 +21,5 @@ public class PaymentInitiationRequest {
 	
 	private String currency;
 
-	public String getDebtorIBAN() {
-		return debtorIBAN;
-	}
-
-	public void setDebtorIBAN(String debtorIBAN) {
-		this.debtorIBAN = debtorIBAN;
-	}
-
-	public String getCreditorIBAN() {
-		return creditorIBAN;
-	}
-
-	public void setCreditorIBAN(String creditorIBAN) {
-		this.creditorIBAN = creditorIBAN;
-	}
-
-	public String getAmount() {
-		return amount;
-	}
-
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-
-	public String getEndToEndId() {
-		return endToEndId;
-	}
-
-	public void setEndToEndId(String endToEndId) {
-		this.endToEndId = endToEndId;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-	
-	
 
 }

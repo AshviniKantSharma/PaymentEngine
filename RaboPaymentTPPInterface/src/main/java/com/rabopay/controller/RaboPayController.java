@@ -4,8 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,33 +22,39 @@ import com.rabopay.service.RaboPayService;
 import com.rabopay.util.AuthorizeRequests;
 import com.rabopay.util.Constants;
 
+/**
+ * RaboPayController : Controller Class to handle incoming requests for initiating payments
+ */
+@Slf4j
 @Controller
 @RequestMapping("/rabopay")
 public class RaboPayController {
 	
 	@Autowired
 	RaboPayService raboPayService;
-	
-	
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(RaboPayController.class);
-	
+
+	/** initiatePayment : method to validate incoming request
+	 * @param paymentInitiationReq
+	 * @param request
+	 * @return ResponseEntity
+	 * @throws Exception
+	 */
 	@SuppressWarnings("static-access")
 	@PostMapping(path = "/v1.0.0/initiate-payment",consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> initiatePayment(
 			@RequestBody PaymentInitiationRequest paymentInitiationReq,
 			HttpServletRequest request
-			) {
-		LOGGER.info("##########RaboPayController: Reached initiatePayment##########");
+			) throws Exception {
+		log.info("##########RaboPayController: Reached initiatePayment##########");
 		
-		LOGGER.info("##########RaboPayController: paymentInitiationReq Object"+paymentInitiationReq);
+		log.info("##########RaboPayController: paymentInitiationReq Object"+paymentInitiationReq);
 		HashMap<String,Object> serObj = raboPayService.tppValidator(paymentInitiationReq);
 		
 		
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		
 		String headerId = request.getHeader("X-Request-Id");
-		LOGGER.info("Retrieve Auth Object");
+		log.info("Retrieve Auth Object");
 		
 		AuthorizeRequests authReq = AuthorizeRequests.requestInstance();
 		
@@ -59,11 +64,12 @@ public class RaboPayController {
 		headers.add("X-Request-Id", headerId);
 		headers.add("Signature", signature);
 		headers.add("Signature-Certificate", signatureCertificate);
-		if(serObj.entrySet().iterator().next().getKey().equals(Constants.PaymentRejectedResponse)) {
-			LOGGER.info("Rejecting Response");
+		System.out.println("serObj"+serObj);
+		if(serObj.entrySet().iterator().hasNext() && serObj.entrySet().iterator().next().getKey().equals(Constants.PaymentRejectedResponse)) {
+			log.info("Rejecting Response");
 		return new ResponseEntity<Object>((PaymentRejectedResponse)serObj.get(Constants.PaymentRejectedResponse),headers,HttpStatus.BAD_REQUEST);
-		}else if (serObj.entrySet().iterator().next().getKey().equals(Constants.PaymentAcceptedResponse)) {
-			LOGGER.info("Valid Response");
+		}else if (serObj.entrySet().iterator().hasNext() && serObj.entrySet().iterator().next().getKey().equals(Constants.PaymentAcceptedResponse)) {
+			log.info("Valid Response");
 			return new ResponseEntity<Object>((PaymentAcceptedResponse)serObj.get(Constants.PaymentAcceptedResponse),headers,HttpStatus.ACCEPTED);
 		}
 		

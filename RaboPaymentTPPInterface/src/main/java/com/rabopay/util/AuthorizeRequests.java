@@ -12,22 +12,19 @@ import java.security.SignatureException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabopay.model.PaymentInitiationRequest;
-
+import lombok.extern.slf4j.Slf4j;
 import sun.misc.BASE64Encoder;
 import sun.security.pkcs.ContentInfo;
 import sun.security.pkcs.PKCS9Attribute;
 import sun.security.pkcs.PKCS9Attributes;
 
+@Slf4j
 @SuppressWarnings("restriction")
 public class AuthorizeRequests {
-	 private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizeRequests.class);
 	 
 	 private static AuthorizeRequests authReq;
 	 
@@ -89,11 +86,11 @@ public class AuthorizeRequests {
 		            signObj.initSign(keyPair.getPrivate());
 		            signObj.update(authed.getDerEncoding());
 		            signature = signObj.sign();
-		            LOGGER.info("Request Signed -> "+signature);
+		            log.info("Request Signed -> "+signature);
 		            
 		} catch (NoSuchAlgorithmException | IllegalArgumentException | IOException | InvalidKeyException | SignatureException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error("Error during signVerifyPaymentRequest",e);
+			log.error("Error during signVerifyPaymentRequest",e);
 		}
 		
 		return new BASE64Encoder().encode(signature);
@@ -117,10 +114,10 @@ public class AuthorizeRequests {
 		String jsonStr="";
 		try {
 		  jsonStr = mapper.writeValueAsString(paymentInitiationReq);
-		  LOGGER.info("ResultingJSONstring = " + jsonStr);
+		  log.info("ResultingJSONstring = " + jsonStr);
 		  
 		} catch (JsonProcessingException e) {
-		   LOGGER.error("Error during object parsing",e);
+		   log.error("Error during object parsing",e);
 		}
 		return jsonStr;
 		
