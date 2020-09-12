@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+
 @Component
 public class Orders {
 	

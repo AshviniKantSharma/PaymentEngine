@@ -1,19 +1,13 @@
 package com.paymentengine.controller;
 
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.paymentengine.model.PaymentInitiationRequest;
 import com.paymentengine.model.PaymentResponse;
@@ -25,7 +19,7 @@ import com.paymentengine.service.PaymentService;
  * PaymentController : Controller Class to handle incoming requests for initiating payments
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/payment")
 public class PaymentController {
 	
@@ -49,7 +43,7 @@ public class PaymentController {
 		PaymentResponse paymentRespObj = payService.facilitatePaymentAndOrder(paymentInitiationReq);
 		
 		
-		return new PaymentResponse();
+		return paymentRespObj;
 	}
 
 }

@@ -2,10 +2,8 @@ package com.paymentengine.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.paymentengine.model.Orders;
 
 
 
@@ -14,7 +12,7 @@ import com.paymentengine.model.Orders;
  * @author Ashvini
  *
  */
-@ComponentScan({"com.paymentengine.controller","com.paymentengine.service","com.paymentengine.util"})
+@ComponentScan({"com.paymentengine.controller","com.paymentengine.service","com.paymentengine.util","com.paymentengine.model"})
 
 @SpringBootApplication
 public class PaymentEngineMain {
@@ -23,8 +21,5 @@ public class PaymentEngineMain {
 		SpringApplication.run(PaymentEngineMain.class, args);
 	}
 	
-	@Bean
-	  public Orders initOrders() {
-	    return new Orders();
-	  }
+	
 }

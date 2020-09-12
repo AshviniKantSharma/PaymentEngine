@@ -1,14 +1,11 @@
 package com.paymentengine.service;
 
-import java.util.HashMap;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymentengine.model.Order;
 import com.paymentengine.model.Orders;
-import com.paymentengine.model.PaymentInitiationRequest;
 import com.paymentengine.model.PaymentResponse;
 import com.paymentengine.model.Product;
 import com.paymentengine.util.Constants;
@@ -53,7 +50,7 @@ public class PaymentServiceImpl implements PaymentService {
 					orderObj.getProdObj().getStatus().equals(Constants.ProductStatus.New.toString())) {
 				log.info("Membership Upgraded");
 				orderObj.getProdObj().setStatus(Constants.ProductStatus.Upgrade.toString());
-				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getPromotion());
+				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getProdObj().getStatus());
 			}
 			
 			ordersObj.getOrderList().add(orderObj);
