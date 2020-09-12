@@ -24,7 +24,7 @@ public class PaymentEngineMain {
 	}
 	
 	@Bean
-	  public Orders securityFilter() {
+	  public Orders initOrders() {
 	    return new Orders();
 	  }
 }

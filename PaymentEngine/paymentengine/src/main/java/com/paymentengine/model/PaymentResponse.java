@@ -2,6 +2,7 @@ package com.paymentengine.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**PaymentResponse : Model class for Success Response of Payment
  * @author Ashvini
@@ -9,14 +10,14 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PaymentResponse {
 	
+
 
 	private String orderId;
 	
 	private String status;
-	
-	private String paymentId;
 	
 	private String promotionMessage;
 

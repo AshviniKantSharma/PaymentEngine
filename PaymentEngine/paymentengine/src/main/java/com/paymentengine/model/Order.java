@@ -13,6 +13,8 @@ public class Order {
 	
 	private String promotion;
 	
+	private boolean agentToComission;
+	
 	Product prodObj;
 
 }

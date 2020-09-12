@@ -3,7 +3,7 @@ package com.paymentengine.util;
 public interface Constants {
 	
 	public static enum ProductStatus {
-		New,Upgrade
+		New,Upgrade,Activate
 	}
 	
 	public static enum ProductTypes {
@@ -11,8 +11,13 @@ public interface Constants {
 	}
 	
 	public static enum OrderPromotion {
-		FreeVideo
+		FreeVideo,None
 	}
+	
+	public static enum AcknowledgementMode {
+		PackingSlip,Email
+	}
+	
 	
 	
 

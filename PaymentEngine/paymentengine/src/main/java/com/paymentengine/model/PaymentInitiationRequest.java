@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentInitiationRequest {
 	
-	private String paymentId;
+	private String orderId;
 	
 	private String paymentType;
 
