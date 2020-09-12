@@ -3,7 +3,7 @@ package com.paymentinterface.paymentengine;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
+
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,10 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 import com.paymentengine.controller.PaymentController;
 import com.paymentengine.model.PaymentInitiationRequest;
@@ -38,7 +35,7 @@ public class PaymentValidatorTest {
 		
 		PaymentInitiationRequest payInitReq = new PaymentInitiationRequest();
 		payInitReq.setOrderId("");
-		payInitReq.setPaymentType(Constants.ProductTypes.Book.toString());
+		payInitReq.setProductType(Constants.ProductTypes.Book.toString());
 		
 		PaymentResponse payResp = new PaymentResponse();
 		payResp.setOrderId("b2c9a5ba-a0f0-4021-9ef4-6037a502fb23");
@@ -62,7 +59,7 @@ public class PaymentValidatorTest {
 		
 		PaymentInitiationRequest payInitReq = new PaymentInitiationRequest();
 		payInitReq.setOrderId("");
-		payInitReq.setPaymentType("None");
+		payInitReq.setProductType("None");
 		
 		
 		try {

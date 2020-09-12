@@ -26,6 +26,8 @@ public class PaymentServiceImpl implements PaymentService {
 	public PaymentResponse facilitatePaymentAndOrder(com.paymentengine.model.PaymentInitiationRequest paymentReqObj) throws Exception {
 		// TODO Auto-generated method stub
 		
+		log.info("Reached facilitatePaymentAndOrder");
+		
 		PaymentResponse payResp = null;
 		
 		if(ordersObj.equals(null)) {
@@ -60,22 +62,22 @@ public class PaymentServiceImpl implements PaymentService {
 			Order orderObj;
 			Product prodObj;
 			
-			if(paymentReqObj.getPaymentType().equals(Constants.ProductTypes.Book.toString())) {
+			if(paymentReqObj.getProductType().equals(Constants.ProductTypes.Book.toString())) {
 				prodObj = new Product(Constants.ProductTypes.Book.toString(), Constants.ProductStatus.New.toString());
 				orderObj = new Order(uuidGenerator(), Constants.AcknowledgementMode.PackingSlip.toString(), Constants.OrderPromotion.None.toString(),Boolean.TRUE, prodObj);
 				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getPromotion());
 				ordersObj.getOrderList().add(orderObj);
-			}else if(paymentReqObj.getPaymentType().equals(Constants.ProductTypes.PhysicalProduct.toString())) {
+			}else if(paymentReqObj.getProductType().equals(Constants.ProductTypes.PhysicalProduct.toString())) {
 				prodObj = new Product(Constants.ProductTypes.PhysicalProduct.toString(), Constants.ProductStatus.New.toString());
 				orderObj = new Order(uuidGenerator(), Constants.AcknowledgementMode.PackingSlip.toString(), Constants.OrderPromotion.None.toString(),Boolean.TRUE, prodObj);
 				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getPromotion());
 				ordersObj.getOrderList().add(orderObj);
-			}else if(paymentReqObj.getPaymentType().equals(Constants.ProductTypes.Membership.toString())) {
+			}else if(paymentReqObj.getProductType().equals(Constants.ProductTypes.Membership.toString())) {
 				prodObj = new Product(Constants.ProductTypes.Membership.toString(), Constants.ProductStatus.New.toString());
 				orderObj = new Order(uuidGenerator(), Constants.ProductStatus.Activate.toString(), Constants.OrderPromotion.None.toString(),Boolean.FALSE, prodObj);
 				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getPromotion());
 				ordersObj.getOrderList().add(orderObj);
-			}else if(paymentReqObj.getPaymentType().equals(Constants.ProductTypes.Video.toString())) {
+			}else if(paymentReqObj.getProductType().equals(Constants.ProductTypes.Video.toString())) {
 				prodObj = new Product(Constants.ProductTypes.Video.toString(), Constants.ProductStatus.New.toString());
 				orderObj = new Order(uuidGenerator(), Constants.AcknowledgementMode.PackingSlip.toString(), Constants.OrderPromotion.FreeVideo.toString(),Boolean.FALSE, prodObj);
 				payResp = constructPayResponse(orderObj.getId(),orderObj.getAcknowledgementMode(),orderObj.getPromotion());

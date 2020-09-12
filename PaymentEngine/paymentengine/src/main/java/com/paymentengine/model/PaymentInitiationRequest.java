@@ -13,7 +13,7 @@ public class PaymentInitiationRequest {
 	
 	private String orderId;
 	
-	private String paymentType;
+	private String productType;
 
 
 }
