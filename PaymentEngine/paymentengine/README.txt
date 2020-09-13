@@ -5,6 +5,7 @@
 5. Data based testing not covered, as it is subjective
 6. Valid product types accepted - Book,PhysicalProduct,Membership,Video
 7. Below are Sample Cases & Responses, kindly go through the sample cases to get an idea of the app
+Enpoint - > http://localhost:8080/payment/v1.0.0/initiate-order
 Case1 - Invalid Product 
 
 Sample Request Object
